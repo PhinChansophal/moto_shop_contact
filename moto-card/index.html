@@ -58,7 +58,12 @@
           <h2>2. Contact Us / ទំនាក់ទំនង</h2>
           <label class="form-label">Section label</label>
           <input class="form-control mb-2" type="text" id="contactLabel" value="ទំនាក់ទំនង">
-          <label class="form-label">Phone numbers</label>
+          <label class="form-label">Title size</label>
+          <div class="d-flex align-items-center gap-2">
+            <input class="form-range flex-grow-1" type="range" id="contactLabelSizeInput" min="12" max="36" step="1" value="19">
+            <input class="form-control form-control-sm" style="width:72px" type="number" id="contactLabelSizeValue" min="12" max="36" value="19">
+          </div>
+          <label class="form-label mt-3">Phone numbers</label>
           <div id="phoneList" class="phone-list"></div>
           <button type="button" class="btn btn-outline-gold btn-sm mt-2" id="addPhoneBtn">+ Add phone number</button>
         </section>
@@ -68,7 +73,12 @@
           <h2>3. ឯកសារបង់រំលស់ / Required Documents</h2>
           <label class="form-label">Section label</label>
           <input class="form-control mb-2" type="text" id="docsLabel" value="ឯកសារត្រូវការ">
-          <label class="form-label">Document list</label>
+          <label class="form-label">Title size</label>
+          <div class="d-flex align-items-center gap-2">
+            <input class="form-range flex-grow-1" type="range" id="docsLabelSizeInput" min="12" max="36" step="1" value="19">
+            <input class="form-control form-control-sm" style="width:72px" type="number" id="docsLabelSizeValue" min="12" max="36" value="19">
+          </div>
+          <label class="form-label mt-3">Document list</label>
           <div id="docsList" class="docs-list"></div>
           <button type="button" class="btn btn-outline-gold btn-sm mt-2" id="addDocBtn">+ Add document</button>
         </section>
@@ -86,7 +96,28 @@
 
         <!-- Footer -->
         <section class="edit-section">
-          <h2>5. Footer — Tel &amp; TG</h2>
+          <h2>5. Title &amp; Description</h2>
+          <label class="form-label">Title line 1</label>
+          <input class="form-control mb-2" type="text" id="headlineLine1Input" value="បង់រំលស់">
+          <label class="form-label">Title line 2</label>
+          <input class="form-control mb-2" type="text" id="headlineLine2Input" value="ម៉ូតូគ្រប់សេរី">
+          <label class="form-label">Title size</label>
+          <div class="d-flex align-items-center gap-2">
+            <input class="form-range flex-grow-1" type="range" id="headlineSizeInput" min="42" max="120" step="1" value="76">
+            <input class="form-control form-control-sm" style="width:72px" type="number" id="headlineSizeValue" min="42" max="120" value="76">
+          </div>
+
+          <label class="form-label mt-3">Description text</label>
+          <textarea class="form-control mb-2" rows="3" id="taglineTextInput">លឿន · រហ័ស · ទាន់ចិត្ត</textarea>
+          <label class="form-label">Description size</label>
+          <div class="d-flex align-items-center gap-2">
+            <input class="form-range flex-grow-1" type="range" id="taglineSizeInput" min="16" max="48" step="1" value="27">
+            <input class="form-control form-control-sm" style="width:72px" type="number" id="taglineSizeValue" min="16" max="48" value="27">
+          </div>
+        </section>
+
+        <section class="edit-section">
+          <h2>6. Footer — Tel &amp; TG</h2>
           <label class="form-label">Brand name (footer)</label>
           <input class="form-control mb-2" type="text" id="footerBrand" value="ដានចំណាប់ Moto Finance">
           <label class="form-label">Footer phone</label>
@@ -97,7 +128,7 @@
 
         <!-- Export -->
         <section class="edit-section export-section">
-          <h2>6. Export</h2>
+          <h2>7. Export</h2>
           <div class="d-grid gap-2">
             <button type="button" class="btn btn-gold" id="exportImageBtn">⬇ Export as Image (PNG)</button>
             <button type="button" class="btn btn-gold-outline" id="exportPdfBtn">⬇ Export as PDF</button>
@@ -133,9 +164,12 @@
 
             <div class="eyebrow"><span class="stem"></span>សេវាកម្មហិរញ្ញវត្ថុម៉ូតូ</div>
 
-            <h1 class="headline">បង់រំលស់<br><span class="accent">ម៉ូតូគ្រប់សេរី</span></h1>
+            <h1 class="headline" id="pv-headline">
+              <span id="pv-headline-line-1">បង់រំលស់</span>
+              <br><span class="accent" id="pv-headline-line-2">ម៉ូតូគ្រប់សេរី</span>
+            </h1>
 
-            <div class="tagline">លឿន <span class="sep">·</span> រហ័ស <span class="sep">·</span> ទាន់ចិត្ត</div>
+            <div class="tagline" id="pv-tagline">លឿន <span class="sep">·</span> រហ័ស <span class="sep">·</span> ទាន់ចិត្ត</div>
 
             <div class="stage-rule">
               <div class="tick t1"></div>

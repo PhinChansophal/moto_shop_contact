@@ -274,14 +274,16 @@ body {
 .eyebrow .stem { width: 40px; height: 1px; background: var(--gold); }
 
 h1.headline {
-  font-family: 'Nokora'; font-weight: 800; font-size: 76px; line-height: 1.18;
+  font-family: 'Nokora'; font-weight: 800; font-size: var(--headline-size, 76px); line-height: 1.18;
   color: var(--text); margin-top: 20px; max-width: 880px; letter-spacing: 0.5px;
 }
 h1.headline .accent { color: var(--gold-light); }
 
 .tagline {
-  margin-top: 20px; font-family: 'Nokora'; font-weight: 400; font-size: 27px;
+  margin-top: 20px; font-family: 'Nokora'; font-weight: 400; font-size: var(--tagline-size, 27px);
   color: var(--text-dim); letter-spacing: 0.5px;
+  white-space: pre-wrap;
+  line-height: 1.35;
 }
 .tagline .sep { color: var(--gold-deep); margin: 0 14px; }
 

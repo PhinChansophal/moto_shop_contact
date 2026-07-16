@@ -12,6 +12,17 @@ const cardEl = document.getElementById('card');
 const bgColorInput = document.getElementById('bgColorInput');
 const bgColorText = document.getElementById('bgColorText');
 const fontFamilySelect = document.getElementById('fontFamilySelect');
+const headlineLine1Input = document.getElementById('headlineLine1Input');
+const headlineLine2Input = document.getElementById('headlineLine2Input');
+const headlineSizeInput = document.getElementById('headlineSizeInput');
+const headlineSizeValue = document.getElementById('headlineSizeValue');
+const taglineTextInput = document.getElementById('taglineTextInput');
+const taglineSizeInput = document.getElementById('taglineSizeInput');
+const taglineSizeValue = document.getElementById('taglineSizeValue');
+const contactLabelSizeInput = document.getElementById('contactLabelSizeInput');
+const contactLabelSizeValue = document.getElementById('contactLabelSizeValue');
+const docsLabelSizeInput = document.getElementById('docsLabelSizeInput');
+const docsLabelSizeValue = document.getElementById('docsLabelSizeValue');
 
 function normalizeHexColor(value) {
   const raw = String(value || '').trim();
@@ -41,6 +52,38 @@ function applyCardFont(fontFamily) {
   cardEl.style.setProperty('--card-font', value);
 }
 
+function bindRangeWithNumber(rangeEl, numberEl, cssVar, fallbackValue) {
+  const min = parseInt(rangeEl.min, 10) || 12;
+  const max = parseInt(rangeEl.max, 10) || 120;
+  const clamp = value => Math.max(min, Math.min(max, Number(value) || fallbackValue));
+  const apply = value => {
+    const nextValue = clamp(value);
+    rangeEl.value = nextValue;
+    numberEl.value = nextValue;
+    document.documentElement.style.setProperty(cssVar, `${nextValue}px`);
+    cardEl.style.setProperty(cssVar, `${nextValue}px`);
+  };
+  rangeEl.addEventListener('input', e => apply(e.target.value));
+  numberEl.addEventListener('input', e => apply(e.target.value));
+  apply(fallbackValue);
+}
+
+function bindTextSizeControl(rangeEl, numberEl, targetId, fallbackValue) {
+  const min = parseInt(rangeEl.min, 10) || 12;
+  const max = parseInt(rangeEl.max, 10) || 36;
+  const clamp = value => Math.max(min, Math.min(max, Number(value) || fallbackValue));
+  const apply = value => {
+    const nextValue = clamp(value);
+    rangeEl.value = nextValue;
+    numberEl.value = nextValue;
+    const targetEl = document.getElementById(targetId);
+    if (targetEl) targetEl.style.fontSize = `${nextValue}px`;
+  };
+  rangeEl.addEventListener('input', e => apply(e.target.value));
+  numberEl.addEventListener('input', e => apply(e.target.value));
+  apply(fallbackValue);
+}
+
 function updatePreviewScale() {
   const stage = document.querySelector('.preview-stage');
   if (!stage) return;
@@ -62,6 +105,25 @@ setTimeout(updatePreviewScale, 100);
 bgColorInput.addEventListener('input', e => applyCardBackground(e.target.value));
 bgColorText.addEventListener('input', e => applyCardBackground(e.target.value));
 fontFamilySelect.addEventListener('change', e => applyCardFont(e.target.value));
+headlineLine1Input.addEventListener('input', e => {
+  const el = document.getElementById('pv-headline-line-1');
+  if (el) el.textContent = e.target.value;
+});
+headlineLine2Input.addEventListener('input', e => {
+  const el = document.getElementById('pv-headline-line-2');
+  if (el) el.textContent = e.target.value;
+});
+taglineTextInput.addEventListener('input', e => {
+  const el = document.getElementById('pv-tagline');
+  if (el) {
+    const escaped = escapeHtml(e.target.value);
+    el.innerHTML = escaped.replace(/\n/g, '<br>');
+  }
+});
+bindRangeWithNumber(headlineSizeInput, headlineSizeValue, '--headline-size', 76);
+bindRangeWithNumber(taglineSizeInput, taglineSizeValue, '--tagline-size', 27);
+bindTextSizeControl(contactLabelSizeInput, contactLabelSizeValue, 'pv-contactLabel', 19);
+bindTextSizeControl(docsLabelSizeInput, docsLabelSizeValue, 'pv-docsLabel', 19);
 applyCardBackground('#16130E');
 applyCardFont(fontFamilySelect.value);
 updatePreviewScale();
